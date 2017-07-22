@@ -1,6 +1,6 @@
 package technical.interview
 
-class RandomNumber {
+class RandomNumbers {
 
     def randomNumbersList
     def sumResult

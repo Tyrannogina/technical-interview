@@ -3,7 +3,7 @@ package technical.interview
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class RandomNumberSpec extends Specification implements DomainUnitTest<RandomNumber> {
+class RandomNumbersSpec extends Specification implements DomainUnitTest<RandomNumbers> {
 
     def setup() {
     }

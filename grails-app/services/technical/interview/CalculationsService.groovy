@@ -4,14 +4,14 @@ import grails.gorm.transactions.Transactional
 
 @Transactional
 class CalculationsService {
-    public static final short TIMES_GENERATED_RANDOM = 100
+    public static final short TIMES_GENERATE_RANDOM = 100
 
     Integer addResult
 
     def calculationsSequence(Integer firstNumber, Integer secondNumber) {
         addResult = addNumbers(firstNumber, secondNumber)
-
         generateRandoms()
+        return true
     }
 
     Integer addNumbers (Integer firstNumber, Integer secondNumber) {
@@ -21,15 +21,21 @@ class CalculationsService {
     def generateRandoms () {
         ArrayList randomList = []
         Random rand = new Random(addResult)
-        TIMES_GENERATED_RANDOM.times {
+        TIMES_GENERATE_RANDOM.times {
             randomList << rand.nextInt()
         }
-        println(randomList)
-        randomList
+        saveRandoms(randomList, addResult)
+        return randomList
     }
 
-    DbAccessService db = new DbAccessService()
+    def saveRandoms(randomsList, addResult) {
+        RandomNumbers rand = new RandomNumbers(randomNumbersList: randomsList, sumResult: addResult)
+        rand.save(flush:true)
 
-
-
+        def values = rand.findAll()
+        values.each {
+            println(it.randomNumbersList)
+            println(it.sumResult)
+        }
+    }
 }

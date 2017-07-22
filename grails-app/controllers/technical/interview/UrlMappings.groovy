@@ -9,7 +9,7 @@ class UrlMappings {
             }
         }
 
-        "/"(controller:"main")
+        "/"(controller:"randomNumbersStorage")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
