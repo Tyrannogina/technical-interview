@@ -26,7 +26,7 @@ class RandomNumbersStorageController {
         def calcOK = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
 
         if (calcOK) {
-            RandomNumbers randomNumbers = new RandomNumbers()
+            RandomNumbersStorage randomNumbers = new RandomNumbersStorage()
             render (view:'/randomNumbersStorage/graph', model:[RandomNumber: randomNumbers])
         }
     }
@@ -47,12 +47,15 @@ class RandomNumbersStorageController {
     @Transactional
     def save(RandomNumbersStorage randomNumbersStorage) {
         if (randomNumbersStorage == null) {
+            println 'values are null'
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
         if (randomNumbersStorage.hasErrors()) {
+            println 'values have errors'
+
             transactionStatus.setRollbackOnly()
             respond randomNumbersStorage.errors, view:'create'
             return

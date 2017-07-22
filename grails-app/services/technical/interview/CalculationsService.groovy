@@ -29,7 +29,7 @@ class CalculationsService {
     }
 
     def saveRandoms(randomsList, addResult) {
-        RandomNumbers rand = new RandomNumbers(randomNumbersList: randomsList, sumResult: addResult)
+        RandomNumbersStorage rand = new RandomNumbersStorage(randomNumbersList: randomsList, sumResult: addResult)
         rand.save(flush:true)
 
         def values = rand.findAll()
