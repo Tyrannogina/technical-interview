@@ -103,17 +103,28 @@
                         var myLine = new Chart(
                             document.getElementById("canvas_Line1").getContext("2d")
                         ).Line(mydata1, opt1);
+                        $("#std-deviation").text("Standard deviation: " + gauss_var);
+                        $("#average").text("Average: " + gauss_mean);
                     }
                 </script>
-
+                <div id="graph-info">
+                    <div class="well">
+                        <span id="std-deviation" ></span>
+                    </div>
+                    <div class="well">
+                        <span id="average"></span>
+                    </div>
+                </div>
                 <table class="table table-striped">
                     <thead>
-                    <th>Random numbers sorted</th>
+                        <tr>
+                            <th class="text-center">Random numbers</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <g:each in="${typeList}">
                         <tr>
-                            <td>${it}</td>
+                            <td class="text-center">${it}</td>
                         </tr>
                     </g:each>
                     </tbody>
