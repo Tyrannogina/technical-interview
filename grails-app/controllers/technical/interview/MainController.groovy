@@ -16,8 +16,8 @@ class MainController {
         }
         def calculations = new CalculationsService()
         def randList = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
-        def myList = randList as grails.converters.JSON
-        render view: 'graph', model: [typeList: myList]
+
+        render view: 'graph', model: [typeList: randList]
     }
 }
 
