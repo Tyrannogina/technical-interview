@@ -2,7 +2,7 @@
 https://github.com/tyrannogina/technical-interview
 
 ### How to use ###
-* Step 1: Install Grails. https://grails.org/download.html I recommend the SDKMAN installation if you are on a unix system.
+* Step 1: [Install Grails.](https://grails.org/download.html) I recommend the SDKMAN installation if you are on a unix system.
 * Step 2: Clone the repo into a folder or download the zip and unzip it in a folder.
 * Step 3: In the terminal, go to this folder.
 * Step 4: From that folder, run `grails run-app` command to have it running.
@@ -43,15 +43,16 @@ For the graph any of the javascript libraries for plotting numbers can and shoul
 * Fighting a lot with Grails strict structure. I am used to program in Javascript/php and in much more flexible environments, so I had trouble adjusting to this.
 * Finding bad documentation/examples: the documentation is very atomized, so it has taken me a lot of time to figure how Grails works in a Global scope.
 * Finding old documentation/information: I have installed Grails 3.3, the latest version, but most of the information found online does not apply to this version, and there is little information about 3.3 from scratch, most of it is only difference with previous versions, and not knowing previous versions I had to research A LOT.
+* Temporary solutions: due to the lack of time and early experience working with these technologies, I have implemented the following solutions, being aware that further improvement is possible ### 
+  1. Addition of the javascript logic generating the graph NOT in the graph.gsp file. The good way to do it, would be having most of the code implemented as functions in an external .js file and just calling one function passing the data on the .gps file.
+  2. Moving the command class to the /src folder, instead of being in the same file as the controller.
+  3. Use a decent git flow: pushing most commits into master is definitely something to avoid.
 
-### Shortcuts I've taken and how would I implement them properly ###
-* I have added all the javascript logic for the graph in the graph.gsp file. The good way to do it would be having most of it as functions in an external .js file and just calling one function passing the data on the .gps file.
-* The command class should not be in the same file as the Controller.
-* I wouldn't use Grails styles, and definitely I would put a lot more effort in this terrible front-end design.
-* I would implement testing.
-* I would implement error control and Model validation.
-* The service methods are a bit of a mess right now, I would probably rethink the structure.
-* I would definitely use a decent git flow, and not pushing most commits into master as I've been doing to save time.
+## Suggestions for further improvement ##
+* Improvement of the front-end design: using Grails styles is not the best practice for front-end design
+* Testing implementation
+* Error control implementation and Model validation
+* Rethinking of the structure of the service methods : they are not clear enough and a better implementation is possible.
 
 ## Time spent in the project (aproximation) ##
 * Configuring the environment (JVM, Groovy, Grails, Intellij): ~8 hours.
