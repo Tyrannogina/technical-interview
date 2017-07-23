@@ -8,7 +8,7 @@ https://github.com/tyrannogina/technical-interview
 * Step 4: From that folder, run `grails run-app` command to have it running.
 * Step 5: In your browser, go to [http://localhost:8080](http://localhost:8080) and voilà! There it is :)
 
-## Objectives ##
+## Goals ##
 1. Create a program, using your favorite scripting language (Bash, Perl, Python etc.),  that takes as an input 2 integer numbers. The program does 2 things:
     * sums up these 2 numbers (i.e. 2+3 = 5 ) and writes the result into a file. 
     * uses the result of the sum ( in this example the 5) to randomly generate 100 random numbers, which should be saved in  another file (bonus, in a database). 
@@ -21,6 +21,7 @@ For the graph any of the javascript libraries for plotting numbers can and shoul
     * Added a service class that does the calculations: sums the numbers and generates 100 random numbers using the sum as a seed.
 2. Full-stack application in Grails created from scratch: the user inputs 2 numbers, a command class validates the input. In case there is no error, the application redirects you to the graph page, sending the random numbers list. 
 3. A javascript library added through the resources then displays the random numbers.
+* Implement a database in MongoDB and not crashing the build.
 
 ### Not achieved yet ### 
 1. Writing data and reading data from files.
@@ -43,6 +44,14 @@ For the graph any of the javascript libraries for plotting numbers can and shoul
 * Fighting a lot with Grails strict structure. I use to program in Javascript/php and in much more flexible environments, so I had trouble adjusting to this.
 * Bad documentation/examples: the documentation is very atomized, so it has taken me a lot of time to figure how Grails works in a Global scope.
 * Old documentation/information: I have installed Grails 3.3, the last version, but most of the information found online does not apply to this version, and there is little information about 3.3 from scratch, most of it is only difference with previous versions, and not knowing previous versions I had to reasearch A LOT.
+
+### Shortcuts I've taken and how would I implement them properly ###
+* I have added all the javascript logic for the graph in the graph.gsp file. The good way to do it would be having most of it as functions in an external js file and just calling one function passing the data on the .gps file.
+* The command class should not be in the same file as the Controller.
+* I wouldn't use Grails styles, and definitely I will put a lot more effort in this terrible frontend.
+* I would implement testing.
+* I would implement error control and Model validation.
+* The service methods are a bit of a mess right now, I would probably rethink the structure.
 
 ## Time spent in the project (aproximation) ##
 * Configuring the environment (JVM, Groovy, Grails, Intellij): ~8 hours.
