@@ -11,7 +11,7 @@ class CalculationsService {
     def calculationsSequence(Integer firstNumber, Integer secondNumber) {
         addResult = addNumbers(firstNumber, secondNumber)
 
-        generateRandoms()
+        return generateRandoms()
     }
 
     Integer addNumbers (Integer firstNumber, Integer secondNumber) {

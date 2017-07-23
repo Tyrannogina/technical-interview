@@ -15,23 +15,9 @@ class MainController {
             return [success: false, messages: command.errors.allErrors] as JSON
         }
         def calculations = new CalculationsService()
-        calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
-       // servicioUno.crearCalculations(command.numero)
-
-        //def calculations = new Calculations(firstNumber: params.firstNumber.toInteger(), secondNumber: params.secondNumber.toInteger()[])
-
-        /*def owners = Owner.findAllByLastName(params.lastName)
-        if (!owners) {
-            return [message: 'owners.not.found']
-        }
-
-        if (owners.size() > 1) {
-            render view: 'selection', model: [owners: owners]
-        }
-        else {
-            redirect action: 'show', id: owners[0].id
-        }
-        */
+        def randList = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
+        def myList = randList as grails.converters.JSON
+        render view: 'graph', model: [typeList: myList]
     }
 }
 
