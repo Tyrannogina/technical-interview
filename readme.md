@@ -52,6 +52,7 @@ For the graph any of the javascript libraries for plotting numbers can and shoul
 * I would implement testing.
 * I would implement error control and Model validation.
 * The service methods are a bit of a mess right now, I would probably rethink the structure.
+* I would definitely use a decent git flow, and not pushing most commits into master as I've been doing to save time.
 
 ## Time spent in the project (aproximation) ##
 * Configuring the environment (JVM, Groovy, Grails, Intellij): ~8 hours.
