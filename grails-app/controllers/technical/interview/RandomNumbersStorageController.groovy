@@ -133,7 +133,7 @@ class RandomNumbersStorageController {
 }
 
 //Duplicated in src/main/groovy until I find a way of importing that one successfully
-class ValidateNumberCommand {
+/*class ValidateNumberCommand {
     Integer firstNumber, secondNumber
 
     static constraints = {
@@ -148,4 +148,4 @@ class ValidateNumberCommand {
             }
         }
     }
-}
+}*/
