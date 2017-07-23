@@ -9,9 +9,23 @@ class CalculationsService {
     Integer addResult
 
     def calculationsSequence(Integer firstNumber, Integer secondNumber) {
+        // Calculate stuff
         addResult = addNumbers(firstNumber, secondNumber)
+        def randoms = generateRandoms()
 
-        return generateRandoms()
+        // Save into file
+        def tempPath = new File("temp")
+        if (!tempPath.exists()){
+            tempPath = new File("temp").mkdirs()
+        }
+
+        File tempFile = new File("${tempPath}/random_numbers${addResult}.json")
+        tempFile.write(randoms.join(";"))
+
+        // Read from file
+        def savedRandoms = tempFile.readLines()
+
+        return savedRandoms[0].split(";").collect{it as Integer}
     }
 
     Integer addNumbers (Integer firstNumber, Integer secondNumber) {
@@ -24,7 +38,6 @@ class CalculationsService {
         TIMES_GENERATED_RANDOM.times {
             randomList << rand.nextInt()
         }
-        println(randomList)
         randomList
     }
 
