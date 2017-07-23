@@ -18,6 +18,7 @@ For the graph any of the javascript libraries for plotting numbers can and shoul
 ## Not achieved yet ## 
 1. Writing data and reading data from files.
 2. Writing data into and from the database. I managed briefly using the h2 temporary database that comes with Grails, but as soon as I managed to add a MongoDB database, I've been getting errors and still have not managed to make it work.
+* Make the random numbers into a normal distribution so the graph shows that and not a line graph.
 * Use the validation class from the /src folder as the best practices mandate, instead of having it in the controller.
 
 ## Things I've learned ##
