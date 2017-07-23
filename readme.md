@@ -20,13 +20,12 @@ For the graph any of the javascript libraries for plotting numbers can and shoul
 1. Creation of the whole program in Groovy. It takes as an input 2 integer numbers. 
     * Addition of a service class that does the calculations: sums the numbers and generates 100 random numbers using the sum as a seed.
 2. Creation of a full-stack application in Grails created from scratch: the user inputs 2 numbers, a command class validates the input. In case there is no error, the application redirects you to the graph page, sending the random numbers list. 
-3. Addition of a javascript library added (ChartNew.js) through the resources then displays the random numbers.
+3. Addition of a javascript library added (ChartNew.js) through the resources then displays the Gauss graph with the normal distribution.
 4. Implementation a database in MongoDB and not crashing the build, althou the save method is not working.
 5. Write and read the list of random numbers into and from files.
 
 ### Not achieved yet ### 
 2. Writing data into and from the database. I managed briefly using the h2 temporary database that comes with Grails, but as soon as I managed to add a MongoDB database, I've been getting errors and still have not managed to make it work.
-* Making the random numbers into a normal distribution, so the graph makes sense (right now it does not).
 * Using the validation class from the /src folder as the best practices mandate, instead of having it in the controller.
 
 ## Things I've learned ##
