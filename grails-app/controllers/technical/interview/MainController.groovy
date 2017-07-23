@@ -12,7 +12,8 @@ class MainController {
         }
 
         if (!command.validate()) {
-            return [success: false, messages: command.errors.allErrors] as JSON
+            render view: "/error"
+            return
         }
         def calculations = new CalculationsService()
         def randList = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
