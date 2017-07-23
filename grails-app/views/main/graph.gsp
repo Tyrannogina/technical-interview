@@ -100,10 +100,7 @@
                 console.log('part 6')
                 console.log(part6)
                 */
-                mydata1.datasets[0].data[i] = (1 / (gauss_var * Math.sqrt(2 * Math.PI))) *
-                Math.exp(
-                    -((mydata1.datasets[0].xPos[i] - gauss_mean) * (mydata1.datasets[0].xPos[i] - gauss_mean)) / (2 * gauss_var)
-                );
+               // mydata1.datasets[0].data[i] = (1 / (gauss_var * Math.sqrt(2 * Math.PI))) * Math.exp( -((mydata1.datasets[0].xPos[i] - gauss_mean) * (mydata1.datasets[0].xPos[i] - gauss_mean)) / (2 * gauss_var));
             }
 
             var opt1 = {
