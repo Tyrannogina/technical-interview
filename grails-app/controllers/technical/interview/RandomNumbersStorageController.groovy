@@ -7,7 +7,6 @@ import static org.springframework.http.HttpStatus.*
 
 @Transactional
 class RandomNumbersStorageController {
-
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
@@ -20,15 +19,14 @@ class RandomNumbersStorageController {
         }
 
         if (!command.validate()) {
-            return [success: false, messages: command.errors.allErrors] as JSON
+            render view: "/error"
+            return
         }
-        def calculations = new CalculationsService()
-        def calcOK = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
 
-        if (calcOK) {
-            RandomNumbersStorage randomNumbers = new RandomNumbersStorage()
-            render (view:'/randomNumbersStorage/graph', model:[RandomNumber: randomNumbers])
-        }
+        def calculations = new CalculationsService()
+        def randList = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
+
+        render view: 'graph', model: [typeList: randList]
     }
 
     /*def index(Integer max) {
@@ -62,7 +60,7 @@ class RandomNumbersStorageController {
         }
 
         randomNumbersStorage.save flush:true
-
+        println "saved"
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'randomNumbersStorage.label', default: 'RandomNumbersStorage'), randomNumbersStorage.id])
@@ -133,7 +131,7 @@ class RandomNumbersStorageController {
 }
 
 //Duplicated in src/main/groovy until I find a way of importing that one successfully
-/*class ValidateNumberCommand {
+class ValidateNumberCommand {
     Integer firstNumber, secondNumber
 
     static constraints = {
@@ -148,4 +146,4 @@ class RandomNumbersStorageController {
             }
         }
     }
-}*/
+}

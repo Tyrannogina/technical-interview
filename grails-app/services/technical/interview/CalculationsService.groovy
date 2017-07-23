@@ -4,7 +4,7 @@ import grails.gorm.transactions.Transactional
 
 @Transactional
 class CalculationsService {
-    public static final short TIMES_GENERATE_RANDOM = 100
+    public static final short TIMES_GENERATE_RANDOM = 200
 
     Integer addResult
 
@@ -19,13 +19,22 @@ class CalculationsService {
             tempPath = new File("temp").mkdirs()
         }
 
+        RandomNumbersStorage rne = new RandomNumbersStorage(randomNumbersList: randoms, addResult: addResult)
+        rne.save()
+
+        def read = rne.findAll()
+        read.each{
+            println it.randomNumbersList
+            println it.sumResult
+        }
+
         File tempFile = new File("${tempPath}/random_numbers${addResult}.json")
         tempFile.write(randoms.join(";"))
 
         // Read from file
         def savedRandoms = tempFile.readLines()
 
-        return savedRandoms[0].split(";").collect{it as Integer}
+        return savedRandoms[0].split(";").collect{it as Float}
     }
 
     Integer addNumbers (Integer firstNumber, Integer secondNumber) {
@@ -36,7 +45,7 @@ class CalculationsService {
         ArrayList randomList = []
         Random rand = new Random(addResult)
         TIMES_GENERATE_RANDOM.times {
-            randomList << rand.nextInt()
+            randomList << rand.nextGaussian()
         }
         randomList
     }
