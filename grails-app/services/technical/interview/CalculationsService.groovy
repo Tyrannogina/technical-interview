@@ -12,22 +12,13 @@ class CalculationsService {
         // Calculate stuff
         addResult = addNumbers(firstNumber, secondNumber)
         def randoms = generateRandoms()
-
+println addResult
+        println(randoms)
         // Save into file
         def tempPath = new File("temp")
         if (!tempPath.exists()){
             tempPath = new File("temp").mkdirs()
         }
-
-        RandomNumbersStorage rne = new RandomNumbersStorage(randomNumbersList: randoms, addResult: addResult)
-        rne.save()
-
-        def read = rne.findAll()
-        read.each{
-            println it.randomNumbersList
-            println it.sumResult
-        }
-
         File tempFile = new File("${tempPath}/random_numbers${addResult}.json")
         tempFile.write(randoms.join(";"))
 

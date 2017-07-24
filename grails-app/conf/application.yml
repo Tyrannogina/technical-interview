@@ -91,29 +91,24 @@ endpoints:
         unique-names: true
 
 ---
+dataSource:
+    pooled: true
+    jmxExport: true
+    driverClassName: com.mysql.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    username: sa
+    password:
 
 environments:
     development:
-        grails:
-            mongodb:
-                host: "localhost"
-                port: 27017
-                username: ""
-                password: ""
-                databaseName: "lifebit"
+        dataSource:
+            dbCreate: create-drop
+            url: jdbc:mysql://liveip.com/liveDb
     test:
-        grails:
-            mongodb:
-                host: "localhost"
-                port: 27017
-                username: ""
-                password: ""
-                databaseName: "lifebit"
+        dataSource:
+            dbCreate: create-drop
+            url: jdbc:mysql://liveip.com/liveDb
     production:
-        grails:
-            mongodb:
-                host: "localhost"
-                port: 27017
-                username: ""
-                password: ""
-                databaseName: "lifebit"
+        dataSource:
+            dbCreate: create-drop
+            url: jdbc:mysql://liveip.com/liveDb

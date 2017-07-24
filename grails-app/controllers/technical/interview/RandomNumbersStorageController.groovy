@@ -26,6 +26,23 @@ class RandomNumbersStorageController {
         def calculations = new CalculationsService()
         def randList = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
 
+        println "THIS IS A NEW RUN"
+        try {
+            RandomNumbersStorage rne = new RandomNumbersStorage(randomNumbersList: randList, addResult: 100)
+            println rne
+            rne.save(flush: true)
+            println rne
+            def read = rne.findAll()
+
+            println read
+            read.each {
+                println it.randomNumbersList
+                println it.sumResult
+            }
+        } catch (e) {
+            println e
+        }
+
         render view: 'graph', model: [typeList: randList]
     }
 
