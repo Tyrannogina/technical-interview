@@ -24,15 +24,26 @@ class RandomNumbersStorageController {
         }
 
         def calculations = new CalculationsService()
-        def randList = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
+        def randomMap = calculations.calculationsSequence(command.firstNumber.toInteger(), command.secondNumber.toInteger())
 
-        render view: 'graph', model: [typeList: randList]
+        save(new RandomNumbersStorage(randomMap as Object))
+        /*
+        def potato = RandomNumbersStorage.findAll()
+        potato.each{
+            println it.randomNumbersList
+            println it.sumResult
+        }
+        */
+
+        render view: 'graph', model: [typeList: randomMap]
     }
 
-    /*def index(Integer max) {
+    def list (Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        println RandomNumbersStorage.list(params)
+
         respond RandomNumbersStorage.list(params), model:[randomNumbersStorageCount: RandomNumbersStorage.count()]
-    }*/
+    }
 
     def show(RandomNumbersStorage randomNumbersStorage) {
         respond randomNumbersStorage
@@ -45,28 +56,23 @@ class RandomNumbersStorageController {
     @Transactional
     def save(RandomNumbersStorage randomNumbersStorage) {
         if (randomNumbersStorage == null) {
-            println 'values are null'
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
-
         if (randomNumbersStorage.hasErrors()) {
-            println 'values have errors'
-
             transactionStatus.setRollbackOnly()
             respond randomNumbersStorage.errors, view:'create'
             return
         }
 
         randomNumbersStorage.save flush:true
-        println "saved"
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'randomNumbersStorage.label', default: 'RandomNumbersStorage'), randomNumbersStorage.id])
-                redirect randomNumbersStorage
+                //redirect randomNumbersStorage
             }
-            '*' { respond randomNumbersStorage, [status: CREATED] }
+            '*' { /*respond randomNumbersStorage, [status: CREATED] */}
         }
     }
 
@@ -113,7 +119,7 @@ class RandomNumbersStorageController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'randomNumbersStorage.label', default: 'RandomNumbersStorage'), randomNumbersStorage.id])
-                redirect action:"index", method:"GET"
+                redirect action:"list", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }
@@ -123,7 +129,7 @@ class RandomNumbersStorageController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'randomNumbersStorage.label', default: 'RandomNumbersStorage'), params.id])
-                redirect action: "index", method: "GET"
+                redirect action: "list", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
         }

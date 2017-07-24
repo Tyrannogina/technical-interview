@@ -11,30 +11,14 @@ class CalculationsService {
     def calculationsSequence(Integer firstNumber, Integer secondNumber) {
         // Calculate stuff
         addResult = addNumbers(firstNumber, secondNumber)
-        def randoms = generateRandoms()
-
+        ArrayList randoms = generateRandoms()
         // Save into file
-        def tempPath = new File("temp")
-        if (!tempPath.exists()){
-            tempPath = new File("temp").mkdirs()
-        }
-
-        RandomNumbersStorage rne = new RandomNumbersStorage(randomNumbersList: randoms, addResult: addResult)
-        rne.save()
-
-        def read = rne.findAll()
-        read.each{
-            println it.randomNumbersList
-            println it.sumResult
-        }
-
-        File tempFile = new File("${tempPath}/random_numbers${addResult}.json")
-        tempFile.write(randoms.join(";"))
-
+        def tempFile = saveIntoFile(randoms)
         // Read from file
-        def savedRandoms = tempFile.readLines()
-
-        return savedRandoms[0].split(";").collect{it as Float}
+        String savedRandoms = readFromFile(tempFile)
+        // Make it back to an array
+        ArrayList savedRandomsArr = savedRandoms.split(";").collect{it as Float}
+        ['randomNumbersList': savedRandomsArr, 'sumResult': addResult]
     }
 
     Integer addNumbers (Integer firstNumber, Integer secondNumber) {
@@ -50,14 +34,24 @@ class CalculationsService {
         randomList
     }
 
-    def saveRandoms(randomsList, addResult) {
-        RandomNumbersStorage rand = new RandomNumbersStorage(randomNumbersList: randomsList, sumResult: addResult)
-        rand.save(flush:true)
+    /******** File manager ***************/
+    def saveIntoFile(ArrayList data) {
+        // Save into file
+        File tempFile = new File("${createPath()}/random_numbers${addResult}.json")
+        tempFile.write(data.join(";")) // As a string
+        tempFile
+    }
 
-        def values = rand.findAll()
-        values.each {
-            println(it.randomNumbersList)
-            println(it.sumResult)
+    def createPath() {
+        def tempPath = new File("temp")
+        if (!tempPath.exists()){
+            tempPath = new File("temp").mkdirs()
         }
+        tempPath
+    }
+
+    def readFromFile(file) {
+        ArrayList line = file.readLines()
+        line[0]
     }
 }

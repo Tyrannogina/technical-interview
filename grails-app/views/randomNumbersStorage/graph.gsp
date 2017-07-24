@@ -11,9 +11,16 @@
     </head>
     <body>
         <main class="container-fluid">
+            <a href="#list-randomNumbersStorage" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+            <div class="nav" role="navigation">
+                <ul>
+                    <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+                    <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                </ul>
+            </div>
             <div class="row">
                 <script>
-                    var list = ${typeList};
+                    var list = ${typeList.randomNumbersList};
 
                     Array.prototype.max = function() {
                         return Math.max.apply(null, this);
@@ -22,6 +29,7 @@
                     Array.prototype.min = function() {
                         return Math.min.apply(null, this);
                     };
+
                     Array.prototype.stanDeviate = function(){
                         var i, j, total = 0, mean = 0, diffSqredArr = [];
                         for(i = 0; i < this.length; i += 1) {
@@ -36,7 +44,7 @@
                         }) / this.length));
                     };
 
-                    //From php function https://stackoverflow.com/questions/24048879/how-can-i-calculate-the-nth-percentile-from-an-array-of-doubles-in-php
+                    // Translated from php function https://stackoverflow.com/questions/24048879/how-can-i-calculate-the-nth-percentile-from-an-array-of-doubles-in-php
                     Array.prototype.getPercentile = function(percentile) {
                         this.sort()
                         var index = (percentile/100) * this.length;
@@ -87,7 +95,7 @@
                         canvasBorders: true,
                         canvasBordersWidth: 3,
                         canvasBordersColor: "black",
-                        graphTitle: "Gauss Function",
+                        graphTitle: "Gauss Function (Seed: ${typeList.sumResult})",
                         legend: true,
                         datasetFill: false,
                         annotateDisplay: true,
@@ -122,7 +130,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${typeList}">
+                    <g:each in="${typeList.randomNumbersList}">
                         <tr>
                             <td class="text-center">${it}</td>
                         </tr>
