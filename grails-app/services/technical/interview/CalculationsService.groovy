@@ -37,17 +37,17 @@ class CalculationsService {
     /******** File manager ***************/
     def saveIntoFile(ArrayList data) {
         // Save into file
-        File tempFile = new File("${createPath()}/random_numbers${addResult}.json")
+        String pathName = 'temp'
+        def path = createPath(pathName)
+        File tempFile = new File("${pathName}/random_numbers${addResult}.json")
         tempFile.write(data.join(";")) // As a string
         tempFile
     }
 
-    def createPath() {
-        def tempPath = new File("temp")
-        if (!tempPath.exists()){
-            tempPath = new File("temp").mkdirs()
+    def createPath(pathName) {
+        if (!(new File(pathName).exists())){
+            new File(pathName).mkdirs()
         }
-        tempPath
     }
 
     def readFromFile(file) {
