@@ -16,7 +16,7 @@ https://github.com/tyrannogina/technical-interview
 3. Once the program is executed the result of the sum of the numbers should be outputted (meaning the 5 in this example) and a normal distribution graph  of the  random numbers. 
 For the graph any of the javascript libraries for plotting numbers can and should be used, and the random numbers should be retrieved from the database that they were saved after the execution of the program.
 
-### Achieved ###
+### Achieved (within ONE week, with no previous knowledge of Groovy or Grails) ###
 1. Creation of the whole program in Groovy. It takes as an input 2 integer numbers. 
     * Addition of a service class that does the calculations: sums the numbers and generates 100 random numbers using the sum as a seed.
 2. Creation of a full-stack application in Grails created from scratch: the user inputs 2 numbers, a command class validates the input. In case there is no error, the application redirects you to the graph page, sending the random numbers list. 
